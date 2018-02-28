@@ -1,4 +1,4 @@
-<h1>Current people:</h1>
+<h1>Current Characters:</h1>
 <h1>Handlebars JS Example</h1>
 {{#each foo}}
 {{this}}
@@ -6,17 +6,13 @@
 <table>
     <thead> 
         <th>First Name</th> 
-        <th>Last Name</th> 
-        <th>Homeworld</th>
-        <th>Age</th>  
+        <th>Last Name</th>
     </thead> 
     <tbody> 
-        {{#each people}} 
+        {{#each characters}}
         <tr> 
-            <td>{{fname}}</td> 
-            <td>{{lname}}</td> 
-            <td>{{homeworld}}</td> 
-            <td>{{age}}</td>
+            <td>{{first_name}}</td>
+            <td>{{last_name}}</td>
             <td><button onclick="deletePerson({{id}})">Delete</button></td>
             <td><a href="/people/{{id}}">Update</a></td>
         </tr> 
