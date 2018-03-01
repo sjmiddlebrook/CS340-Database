@@ -1,0 +1,19 @@
+<h1>Update {{character.first_name}} {{character.last_name}}:</h1>
+<form id="update-character" action="/characters" method="post">
+    First name: <input type="text" name="first_name" value="{{character.first_name}}"><br>
+    Last name: <input type="text" name="last_name" value="{{character.last_name}}"><br>
+    Title: <select name="title_id" id="title-selector">
+        {{#each titles}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    Homeworld: <select name="house_id" id="house-selector">
+        {{#each houses}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+
+</form>
+<button onclick="updateCharacter({{character.id}})">Update</button>
+<script defer>selectTitle({{character.title_id}});</script>
+<script defer>selectHouse({{character.house_id}});</script>
