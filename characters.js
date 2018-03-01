@@ -2,23 +2,24 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    function getPlanets(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, name FROM bsg_planets", function(error, results, fields){
+    function getHouses(res, mysql, context, complete){
+        mysql.pool.query("SELECT id, name FROM got_house", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.planets  = results;
+            context.houses  = results;
             complete();
         });
     }
 
     function getCharacters(res, mysql, context, complete){
-        mysql.pool.query("SELECT got_character.id, got_character.first_name, got_character.last_name FROM got_character", function(error, results, fields){
+        mysql.pool.query("SELECT got_character.id, got_character.first_name, got_character.last_name, got_house.name AS house_name FROM got_character INNER JOIN got_house ON got_character.house_id = got_house.id", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
+            console.log(results);
             context.characters = results;
             complete();
         });
@@ -45,11 +46,11 @@ module.exports = function(){
         context.jsscripts = ["deleteperson.js"];
         var mysql = req.app.get('mysql');
         getCharacters(res, mysql, context, complete);
-        getPlanets(res, mysql, context, complete);
+        getHouses(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
-                res.render('people', context);
+                res.render('characters', context);
             }
 
         }
@@ -63,7 +64,7 @@ module.exports = function(){
         context.jsscripts = ["selectedplanet.js", "updateperson.js"];
         var mysql = req.app.get('mysql');
         getPerson(res, mysql, context, req.params.id, complete);
-        getPlanets(res, mysql, context, complete);
+        getHouses(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
