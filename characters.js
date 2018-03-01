@@ -13,8 +13,19 @@ module.exports = function(){
         });
     }
 
+    function getTitles(res, mysql, context, complete){
+        mysql.pool.query("SELECT id, name FROM got_title", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.titles  = results;
+            complete();
+        });
+    }
+
     function getCharacters(res, mysql, context, complete){
-        mysql.pool.query("SELECT got_character.id, got_character.first_name, got_character.last_name, got_house.name AS house_name FROM got_character INNER JOIN got_house ON got_character.house_id = got_house.id", function(error, results, fields){
+        mysql.pool.query("SELECT got_character.id, got_character.first_name, got_character.last_name, got_house.name AS house_name, got_title.name AS title FROM got_character INNER JOIN got_house ON got_character.house_id = got_house.id INNER JOIN got_title ON got_character.title_id = got_title.id", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -47,9 +58,10 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         getCharacters(res, mysql, context, complete);
         getHouses(res, mysql, context, complete);
+        getTitles(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 3){
                 res.render('characters', context);
             }
 

@@ -7,6 +7,7 @@
     <thead> 
         <th>First Name</th> 
         <th>Last Name</th>
+        <th>Title</th>
         <th>House</th>
     </thead> 
     <tbody> 
@@ -14,6 +15,7 @@
         <tr> 
             <td>{{first_name}}</td>
             <td>{{last_name}}</td>
+            <td>{{title}}</td>
             <td>{{house_name}}</td>
             <td><button onclick="deletePerson({{id}})">Delete</button></td>
             <td><a href="/characters/{{id}}">Update</a></td>
@@ -23,9 +25,14 @@
     <form id="addcharacter" action="/characters" method="post">
     First name: <input type="text" name="first_name"><br>
     Last name: <input type="text" name="last_name"><br>
+    Title: <select name="title">
+        {{#each titles}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
     House: <select name="house">
         {{#each houses}}
-        <option value="{{id}}">{{name}}</option>
+            <option value="{{id}}">{{name}}</option>
         {{/each}}
     </select><br>
     Age: <input type="number" name="age"><br>
