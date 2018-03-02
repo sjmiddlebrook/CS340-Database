@@ -19,18 +19,19 @@ app.set('mysql', mysql);
 
 app.use('/characters', require('./characters.js'));
 app.use('/kingdoms', require('./kingdoms.js'));
+app.use('/continents', require('./continents.js'));
 
 app.use(function(req,res){
-  res.status(404);
-  res.render('404');
+    res.status(404);
+    res.render('404');
 });
 
 app.use(function(err, req, res, next){
-  console.error(err.stack);
-  res.status(500);
-  res.render('500');
+    console.error(err.stack);
+    res.status(500);
+    res.render('500');
 });
 
 app.listen(app.get('port'), function(){
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+    console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });

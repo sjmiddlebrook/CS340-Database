@@ -1,0 +1,6 @@
+<h1>Update {{continent.name}}:</h1>
+<form id="update-continent" action="/continents" method="post">
+    Name: <input type="text" name="name" value="{{continent.name}}"><br>
+
+</form>
+<button onclick="updateContinent({{continent.id}})">Update</button>
