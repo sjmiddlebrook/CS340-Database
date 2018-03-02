@@ -6,8 +6,16 @@
     {{#each jsscripts}}
     <script src="/static/{{this}}"></script>
     {{/each}}
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 <body>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/characters/">Characters</a></li>
+        <li><a href="/kingdoms/">Kingdoms</a></li>
+        <li><a href="/continents/">Continents</a></li>
+        <li><a href="/titles/">Title</a></li>
+    </ul>
 	{{{body}}}
 </body>
 </html>

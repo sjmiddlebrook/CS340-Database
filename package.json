@@ -1,5 +1,5 @@
 {
-  "name": "hello-world",
+  "name": "got-database",
   "version": "1.0.0",
   "description": "Database project with express and node.js",
   "main": "app.js",
