@@ -1,8 +1,4 @@
 <h1>Current Characters:</h1>
-<h1>Handlebars JS Example</h1>
-{{#each foo}}
-{{this}}
-{{/each}}
 <table>
     <thead> 
         <th>First Name</th> 
@@ -21,8 +17,11 @@
             <td><a href="/characters/{{id}}">Update</a></td>
         </tr> 
         {{/each}} 
-    </tbody> 
-    <form id="addcharacter" action="/characters" method="post">
+    </tbody>
+</table>
+
+<h1>Add Character:</h1>
+<form id="addcharacter" action="/characters" method="post">
     First name: <input type="text" name="first_name"><br>
     Last name: <input type="text" name="last_name"><br>
     Title: <select name="title_id">
@@ -37,4 +36,4 @@
     </select><br>
     <input type="submit" value="Submit">
     </form>
-</table> 
+

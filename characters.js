@@ -48,7 +48,7 @@ module.exports = function(){
         });
     }
 
-    /*Display all people. Requires web based javascript to delete users with AJAX*/
+    /*Display all characters. Requires web based javascript to delete users with AJAX*/
 
     router.get('/', function(req, res){
         var callbackCount = 0;
