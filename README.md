@@ -1,1 +1,1 @@
-# CS290-Server-Side-Examples
+# Game of Thrones Database Website
