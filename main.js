@@ -20,6 +20,7 @@ app.set('mysql', mysql);
 app.use('/characters', require('./characters.js'));
 app.use('/kingdoms', require('./kingdoms.js'));
 app.use('/continents', require('./continents.js'));
+app.use('/titles', require('./titles.js'));
 
 app.use(function(req,res){
     res.status(404);
