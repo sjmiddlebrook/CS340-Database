@@ -1,0 +1,19 @@
+<h1>Update {{kingdom.name}}:</h1>
+<form id="update-kingdom" action="/kingdoms" method="post">
+    Name: <input type="text" name="name" value="{{kingdom.name}}"><br>
+    Capital: <input type="text" name="capital" value="{{kingdom.capital}}"><br>
+    Ruled by House: <select name="house_ruler_id" id="house-selector">
+        {{#each houses}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    Continent: <select name="continent_id" id="continent-selector">
+        {{#each continents}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+
+</form>
+<button onclick="updateKingdom({{kingdom.id}})">Update</button>
+<script defer>selectContinent({{kingdom.continent_id}});</script>
+<script defer>selectHouse({{kingdom.house_ruler_id}});</script>

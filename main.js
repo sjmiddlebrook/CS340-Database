@@ -18,6 +18,7 @@ app.set('port', process.argv[2]);
 app.set('mysql', mysql);
 
 app.use('/characters', require('./characters.js'));
+app.use('/kingdoms', require('./kingdoms.js'));
 
 app.use(function(req,res){
   res.status(404);

@@ -1,0 +1,39 @@
+<h1>Current Kingdoms:</h1>
+<table>
+    <thead> 
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Ruled by</th>
+        <th>Continent</th>
+    </thead> 
+    <tbody> 
+        {{#each kingdoms}}
+        <tr> 
+            <td>{{name}}</td>
+            <td>{{capital}}</td>
+            <td>{{ruled_by_name}}</td>
+            <td>{{continent}}</td>
+            <td><button onclick="deleteKingdom({{id}})">Delete</button></td>
+            <td><a href="/kingdoms/{{id}}">Update</a></td>
+        </tr> 
+        {{/each}} 
+    </tbody>
+</table>
+
+<h1>Add Kingdom:</h1>
+<form id="addkingdom" action="/kingdoms" method="post">
+    Name: <input type="text" name="name"><br>
+    Capital: <input type="text" name="capital"><br>
+    Ruled by: <select name="house_ruler_id">
+        {{#each houses}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    Continent: <select name="continent_id">
+        {{#each continents}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    <input type="submit" value="Submit">
+    </form>
+
