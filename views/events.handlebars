@@ -1,0 +1,25 @@
+<h1>Current Events:</h1>
+<table>
+    <thead> 
+        <th>Name</th>
+        <th>Setting</th>
+    </thead> 
+    <tbody> 
+        {{#each events}}
+        <tr> 
+            <td>{{name}}</td>
+            <td>{{setting}}</td>
+            <td><button onclick="deleteEvent({{id}})">Delete</button></td>
+            <td><a href="/events/{{id}}">Update</a></td>
+        </tr> 
+        {{/each}} 
+    </tbody>
+</table>
+
+<h1>Add Event:</h1>
+<form id="addevent" action="/events" method="post">
+    Name: <input type="text" name="name"><br>
+    Setting: <input type="text" name="setting"><br>
+    <input type="submit" value="Submit">
+</form>
+

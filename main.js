@@ -22,6 +22,7 @@ app.use('/kingdoms', require('./kingdoms.js'));
 app.use('/continents', require('./continents.js'));
 app.use('/titles', require('./titles.js'));
 app.use('/houses', require('./houses.js'));
+app.use('/events', require('./events.js'));
 app.use('/', require('./home.js'));
 
 app.use(function(req,res){

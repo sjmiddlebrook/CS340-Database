@@ -1,0 +1,6 @@
+<h1>Update {{event.name}}:</h1>
+<form id="update-event" action="/events" method="post">
+    Name: <input type="text" name="name" value="{{event.name}}"><br>
+    Setting: <input type="text" name="setting" value="{{event.setting}}"><br>
+</form>
+<button onclick="updateEvent({{event.id}})">Update</button>
