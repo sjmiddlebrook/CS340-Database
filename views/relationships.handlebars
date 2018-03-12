@@ -1,0 +1,36 @@
+<h1>Current Relationships:</h1>
+<table>
+    <thead> 
+        <th>Character</th>
+        <th>Related to</th>
+        <th>Type</th>
+    </thead> 
+    <tbody> 
+        {{#each relationships}}
+        <tr> 
+            <td>{{name1}}</td>
+            <td>{{name2}}</td>
+            <td>{{type}}</td>
+            <td><button onclick="deleteRelationship({{id}})">Delete</button></td>
+            <td><a href="/relationships/{{id}}">Update</a></td>
+        </tr> 
+        {{/each}} 
+    </tbody>
+</table>
+
+<h1>Add Event:</h1>
+<form id="addrelationship" action="/relationships" method="post">
+    Character Name: <select name="name1">
+        {{#each characters}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    Related to Character: <select name="name2">
+    {{#each characters}}
+        <option value="{{id}}">{{name}}</option>
+    {{/each}}
+</select><br>
+    Relationship Type: <input type="text" name="type"><br>
+    <input type="submit" value="Submit">
+</form>
+

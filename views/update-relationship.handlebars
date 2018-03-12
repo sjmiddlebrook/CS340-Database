@@ -1,0 +1,8 @@
+<h1>Update Relationship:</h1>
+<form id="update-relationship" action="/relationships" method="post">
+    Character Name: {{relationship.name1}}<br>
+    Related to Character: {{relationship.name2}}<br>
+    Relationship Type: <input type="text" name="type" value="{{relationship.type}}"><br>
+</form>
+<button onclick="updateRelationship({{relationship.id}})">Update</button>
+
