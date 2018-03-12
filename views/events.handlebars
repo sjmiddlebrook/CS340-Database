@@ -3,18 +3,27 @@
     <thead> 
         <th>Name</th>
         <th>Setting</th>
+        <th>Characters Involved</th>
     </thead> 
     <tbody> 
         {{#each events}}
         <tr> 
             <td>{{name}}</td>
             <td>{{setting}}</td>
+            <td>
+                <ul>
+                {{#each characters}}
+                    <li>{{name}}</li>
+                {{/each}}
+                </ul>
+            </td>
             <td><button onclick="deleteEvent({{id}})">Delete</button></td>
             <td><a href="/events/{{id}}">Update</a></td>
         </tr> 
         {{/each}} 
     </tbody>
 </table>
+
 
 <h1>Add Event:</h1>
 <form id="addevent" action="/events" method="post">

@@ -26,6 +26,25 @@ module.exports = function(){
         });
     }
 
+    function getCharacters(res, mysql, context, complete){
+        mysql.pool.query("SELECT got_event.id, got_event_characters.character_id, CONCAT(got_character.first_name, ' ', got_character.last_name) AS name FROM got_event INNER JOIN got_event_characters ON got_event.id = got_event_characters.event_id INNER JOIN got_character ON got_event_characters.character_id = got_character.id", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            for (var i = 0; i < context.events.length; i++) {
+                var event_characters = [];
+                for (var j = 0; j < results.length; j++) {
+                    if (results[j].id === context.events[i].id) {
+                        event_characters.push(results[j])
+                    }
+                }
+                context.events[i]['characters'] = event_characters
+            }
+            complete();
+        });
+    }
+
     /*Display all events. Requires web based javascript to delete events with AJAX*/
 
     router.get('/', function(req, res){
@@ -34,9 +53,10 @@ module.exports = function(){
         context.jsscripts = ["deleteevent.js"];
         var mysql = req.app.get('mysql');
         getEvents(res, mysql, context, complete);
+        getCharacters(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('events', context);
             }
 
