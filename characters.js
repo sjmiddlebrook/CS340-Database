@@ -36,8 +36,9 @@ module.exports = function(){
     }
 
     function getCharactersSearch(res, search_text, mysql, context, complete) {
-        var sql = "SELECT got_character.id, got_character.first_name, got_character.last_name, got_house.name AS house_name, got_title.name AS title FROM got_character LEFT JOIN got_house ON got_character.house_id = got_house.id LEFT JOIN got_title ON got_character.title_id = got_title.id WHERE got_character.first_name = ?";
-        var inserts = [search_text];
+        var sql = "SELECT got_character.id, got_character.first_name, got_character.last_name, got_house.name AS house_name, got_title.name AS title FROM got_character LEFT JOIN got_house ON got_character.house_id = got_house.id LEFT JOIN got_title ON got_character.title_id = got_title.id WHERE got_character.first_name LIKE ? OR got_character.last_name LIKE ?";
+        search_text = "%".concat(search_text, "%");
+        var inserts = [search_text, search_text];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -69,10 +70,8 @@ module.exports = function(){
         context.jsscripts = ["deletecharacter.js", "searchCharacter.js"];
         var mysql = req.app.get('mysql');
         if (req.query['search']) {
-            console.log("searching");
             getCharactersSearch(res, req.query['search'], mysql, context, complete);
         } else {
-            console.log("normal");
             getCharacters(res, mysql, context, complete);
         }
         getHouses(res, mysql, context, complete);
@@ -80,8 +79,8 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 3){
-                console.log(context);
                 res.render('characters', context);
+                console.log("after res render");
             }
 
         }

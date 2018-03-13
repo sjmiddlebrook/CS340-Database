@@ -1,13 +1,10 @@
-// function searchCharacter(search_text){
-//     console.log("Seaching for character ".concat(search_text));
-// }
-
 function searchCharacter(search_text){
     $.ajax({
         url: '/characters?search=' + search_text,
         type: 'get',
         success: function(result){
-            document.write(result);
+            $("html").html(result);
+            console.log(result);
             document.getElementById('searchText').value = search_text;
         }
     })
