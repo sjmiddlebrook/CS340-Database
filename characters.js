@@ -81,7 +81,6 @@ module.exports = function(){
             if(callbackCount >= 3){
                 res.render('characters', context);
             }
-
         }
     });
 
