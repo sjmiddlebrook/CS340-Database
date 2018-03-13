@@ -9,6 +9,7 @@ module.exports = function(){
                 res.end();
             }
             context.events = results;
+            getCharacters(res, mysql, context, complete);
             complete();
         });
     }
@@ -53,7 +54,6 @@ module.exports = function(){
         context.jsscripts = ["deleteevent.js"];
         var mysql = req.app.get('mysql');
         getEvents(res, mysql, context, complete);
-        getCharacters(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
