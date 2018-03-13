@@ -3,11 +3,13 @@
     First name: <input type="text" name="first_name" value="{{character.first_name}}"><br>
     Last name: <input type="text" name="last_name" value="{{character.last_name}}"><br>
     Title: <select name="title_id" id="title-selector">
+        <option value=""></option>
         {{#each titles}}
             <option value="{{id}}">{{name}}</option>
         {{/each}}
     </select><br>
     House: <select name="house_id" id="house-selector">
+        <option value=""></option>
         {{#each houses}}
             <option value="{{id}}">{{name}}</option>
         {{/each}}

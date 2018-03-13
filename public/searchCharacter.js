@@ -4,7 +4,6 @@ function searchCharacter(search_text){
         type: 'get',
         success: function(result){
             $("html").html(result);
-            console.log(result);
             document.getElementById('searchText').value = search_text;
         }
     })

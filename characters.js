@@ -80,7 +80,6 @@ module.exports = function(){
             callbackCount++;
             if(callbackCount >= 3){
                 res.render('characters', context);
-                console.log("after res render");
             }
 
         }
@@ -110,6 +109,12 @@ module.exports = function(){
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO got_character (first_name, last_name, title_id, house_id) VALUES (?,?,?,?)";
+        if (req.body.title_id === "") {
+            req.body.title_id = null;
+        }
+        if (req.body.house_id === "") {
+            req.body.house_id = null;
+        }
         var inserts = [req.body.first_name, req.body.last_name, req.body.title_id, req.body.house_id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -126,6 +131,12 @@ module.exports = function(){
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE got_character SET first_name=?, last_name=?, house_id=?, title_id=? WHERE id=?";
+        if (req.body.title_id === "") {
+            req.body.title_id = null;
+        }
+        if (req.body.house_id === "") {
+            req.body.house_id = null;
+        }
         var inserts = [req.body.first_name, req.body.last_name, req.body.house_id, req.body.title_id, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
