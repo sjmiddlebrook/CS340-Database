@@ -1,5 +1,5 @@
 <h1>Current Titles:</h1>
-<table>
+<table class="table">
     <thead> 
         <th>Name</th>
     </thead> 
@@ -7,8 +7,8 @@
         {{#each titles}}
         <tr> 
             <td>{{name}}</td>
-            <td><button onclick="deleteTitle({{id}})">Delete</button></td>
-            <td><a href="/titles/{{id}}">Update</a></td>
+            <td><button onclick="deleteTitle({{id}})" class="btn btn-danger">Delete</button></td>
+            <td><a href="/titles/{{id}}"><button class="btn btn-secondary">Update</button></a></td>
         </tr> 
         {{/each}} 
     </tbody>
@@ -16,7 +16,11 @@
 
 <h1>Add Title:</h1>
 <form id="addtitle" action="/titles" method="post">
-    Name: <input type="text" name="name"><br>
-    <input type="submit" value="Submit">
+    <div class="form-group">
+        Name: <input type="text" name="name"><br>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
 </form>
 

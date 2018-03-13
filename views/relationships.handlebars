@@ -1,5 +1,5 @@
 <h1>Character Relations:</h1>
-<table>
+<table class="table">
     <thead> 
         <th>Character</th>
         <th>Related to</th>
@@ -11,8 +11,8 @@
             <td>{{name1}}</td>
             <td>{{name2}}</td>
             <td>{{type}}</td>
-            <td><button onclick="deleteRelationship({{id}})">Delete</button></td>
-            <td><a href="/relationships/{{id}}">Update</a></td>
+            <td><button onclick="deleteRelationship({{id}})" class="btn btn-danger">Delete</button></td>
+            <td><a href="/relationships/{{id}}"><button class="btn btn-secondary">Update</button></a></td>
         </tr> 
         {{/each}} 
     </tbody>
@@ -30,7 +30,11 @@
         <option value="{{id}}">{{name}}</option>
     {{/each}}
 </select><br>
-    Relationship Type: <input type="text" name="type"><br>
-    <input type="submit" value="Submit">
+    <div class="form-group">
+        Relationship Type: <input type="text" name="type"><br>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
 </form>
 

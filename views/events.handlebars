@@ -1,5 +1,5 @@
-<h1>Current Events:</h1>
-<table>
+<h1>Major Events:</h1>
+<table class="table">
     <thead> 
         <th>Name</th>
         <th>Setting</th>
@@ -17,8 +17,8 @@
                 {{/each}}
                 </ul>
             </td>
-            <td><button onclick="deleteEvent({{id}})">Delete</button></td>
-            <td><a href="/events/{{id}}">Update</a></td>
+            <td><button onclick="deleteEvent({{id}})"  class="btn btn-danger">Delete</button></td>
+            <td><a href="/events/{{id}}"><button class="btn btn-secondary">Update</button></a></td>
         </tr> 
         {{/each}} 
     </tbody>
@@ -27,8 +27,14 @@
 
 <h1>Add Event:</h1>
 <form id="addevent" action="/events" method="post">
-    Name: <input type="text" name="name"><br>
-    Setting: <input type="text" name="setting"><br>
-    <input type="submit" value="Submit">
+    <div class="form-group">
+        Name: <input type="text" name="name"><br>
+    </div>
+    <div class="form-group">
+        Setting: <input type="text" name="setting"><br>
+    </div>
+    <div class="form-group">
+    <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
 </form>
 

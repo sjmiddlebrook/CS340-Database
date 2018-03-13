@@ -1,8 +1,12 @@
-<input type="text" id="searchText" placeholder="Search by name..">
-<button type="submit" onclick="searchCharacter(document.getElementById('searchText').value)">Search</button>
-<button type="submit" onclick="clearSearch()">Clear Search</button>
-<h1>Current Characters:</h1>
-<table>
+<nav class="navbar">
+    <form class="form-inline">
+        <input type="text" class="form-control" id="searchText" placeholder="Search by name..">
+        <button type="submit" onclick="searchCharacter(document.getElementById('searchText').value)" class="btn btn-outline-success">Search</button>
+        <button type="submit" onclick="clearSearch()" class="btn btn-outline-danger">Clear Search</button>
+    </form>
+</nav>
+        <h1>Current Characters:</h1>
+<table class="table">
     <thead> 
         <th>First Name</th> 
         <th>Last Name</th>
@@ -16,8 +20,8 @@
             <td>{{last_name}}</td>
             <td>{{title}}</td>
             <td>{{house_name}}</td>
-            <td><button onclick="deleteCharacter({{id}})">Delete</button></td>
-            <td><a href="/characters/{{id}}">Update</a></td>
+            <td><button onclick="deleteCharacter({{id}})" class="btn btn-danger">Delete</button></td>
+            <td><a href="/characters/{{id}}"><button class="btn btn-secondary">Update</button></a></td>
         </tr> 
         {{/each}} 
     </tbody>
@@ -25,20 +29,30 @@
 
 <h1>Add Character:</h1>
 <form id="addcharacter" action="/characters" method="post">
-    First name: <input type="text" name="first_name"><br>
-    Last name: <input type="text" name="last_name"><br>
-    Title: <select name="title_id">
-        <option value=""></option>
-        {{#each titles}}
+    <div class="form-group">
+        First name: <input type="text" name="first_name"><br>
+    </div>
+    <div class="form-group">
+        Last name: <input type="text" name="last_name"><br>
+    </div>
+    <div class="form-group">
+        Title: <select name="title_id">
+            <option value=""></option>
+            {{#each titles}}
             <option value="{{id}}">{{name}}</option>
-        {{/each}}
-    </select><br>
-    House: <select name="house_id">
-        <option value=""></option>
-        {{#each houses}}
+            {{/each}}
+        </select><br>
+    </div>
+    <div class="form-group">
+        House: <select name="house_id">
+            <option value=""></option>
+            {{#each houses}}
             <option value="{{id}}">{{name}}</option>
-        {{/each}}
-    </select><br>
-    <input type="submit" value="Submit">
+            {{/each}}
+        </select><br>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
 </form>
 

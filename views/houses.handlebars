@@ -1,5 +1,5 @@
 <h1>Current Houses:</h1>
-<table>
+<table class="table">
     <thead> 
         <th>Name</th>
         <th>Sigil</th>
@@ -11,8 +11,8 @@
             <td>{{name}}</td>
             <td>{{sigil}}</td>
             <td>{{words}}</td>
-            <td><button onclick="deleteHouse({{id}})">Delete</button></td>
-            <td><a href="/houses/{{id}}">Update</a></td>
+            <td><button onclick="deleteHouse({{id}})" class="btn btn-danger">Delete</button></td>
+            <td><a href="/houses/{{id}}"><button class="btn btn-secondary">Update</button></a></td>
         </tr> 
         {{/each}} 
     </tbody>
@@ -20,9 +20,17 @@
 
 <h1>Add House:</h1>
 <form id="addhouse" action="/houses" method="post">
-    Name: <input type="text" name="name"><br>
-    Sigil: <input type="text" name="sigil"><br>
-    Words: <input type="text" name="words"><br>
-    <input type="submit" value="Submit">
+    <div class="form-group">
+        Name: <input type="text" name="name"><br>
+    </div>
+    <div class="form-group">
+        Sigil: <input type="text" name="sigil"><br>
+    </div>
+    <div class="form-group">
+        Words: <input type="text" name="words"><br>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
 </form>
 
