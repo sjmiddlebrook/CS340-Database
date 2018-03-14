@@ -91,6 +91,9 @@ module.exports = function(){
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO got_kingdom (name, capital, house_ruler_id, continent_id) VALUES (?,?,?,?)";
+        if (req.body.house_ruler_id === "") {
+            req.body.house_ruler_id = null;
+        }
         var inserts = [req.body.name, req.body.capital, req.body.house_ruler_id, req.body.continent_id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -107,6 +110,9 @@ module.exports = function(){
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE got_kingdom SET name=?, capital=?, house_ruler_id=?, continent_id=? WHERE id=?";
+        if (req.body.house_ruler_id === "") {
+            req.body.house_ruler_id = null;
+        }
         var inserts = [req.body.name, req.body.capital, req.body.house_ruler_id, req.body.continent_id, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){

@@ -1,6 +1,7 @@
 <h1>Update {{title.name}}:</h1>
 <form id="update-title" action="/titles" method="post">
+    <div class="form-group">
     Name: <input type="text" name="name" value="{{title.name}}"><br>
-
+    </div>
 </form>
-<button onclick="updateTitle({{title.id}})">Update</button>
+<button class="btn btn-primary" onclick="updateTitle({{title.id}})">Update</button>

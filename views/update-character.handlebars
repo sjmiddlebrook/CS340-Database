@@ -1,21 +1,28 @@
 <h1>Update {{character.first_name}} {{character.last_name}}:</h1>
 <form id="update-character" action="/characters" method="post">
+    <div class="form-group">
     First name: <input type="text" name="first_name" value="{{character.first_name}}"><br>
+    </div>
+    <div class="form-group">
     Last name: <input type="text" name="last_name" value="{{character.last_name}}"><br>
+    </div>
+    <div class="form-group">
     Title: <select name="title_id" id="title-selector">
         <option value=""></option>
         {{#each titles}}
             <option value="{{id}}">{{name}}</option>
         {{/each}}
     </select><br>
+    </div>
+    <div class="form-group">
     House: <select name="house_id" id="house-selector">
         <option value=""></option>
         {{#each houses}}
             <option value="{{id}}">{{name}}</option>
         {{/each}}
     </select><br>
-
+    </div>
 </form>
-<button onclick="updateCharacter({{character.id}})">Update</button>
+<button class="btn btn-primary" onclick="updateCharacter({{character.id}})">Update</button>
 <script defer>selectTitle({{character.title_id}});</script>
 <script defer>selectHouse({{character.house_id}});</script>
