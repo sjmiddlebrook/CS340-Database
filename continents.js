@@ -60,21 +60,6 @@ module.exports = function(){
         }
     });
 
-    /* Adds a continent, redirects to the continents page after adding */
-
-    router.post('/', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO got_continent (name) VALUES (?)";
-        var inserts = [req.body.name];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/continents');
-            }
-        });
-    });
 
     /* The URI that update data is sent to in order to update a continent */
 
@@ -93,22 +78,7 @@ module.exports = function(){
         });
     });
 
-    /* Route to delete a continent, simply returns a 202 upon success. Ajax will handle this. */
 
-    router.delete('/:id', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM got_continent WHERE id = ?";
-        var inserts = [req.params.id];
-        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.status(400);
-                res.end();
-            }else{
-                res.status(202).end();
-            }
-        })
-    });
 
     return router;
 }();
