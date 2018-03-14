@@ -75,7 +75,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteevent.js"];
+        context.jsscripts = ["deleteEvent.js"];
         var mysql = req.app.get('mysql');
         getEvents(res, mysql, context, complete);
         getCharacters(res, mysql, context, complete);
@@ -93,7 +93,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updateevent.js", "selectedCharacters.js"];
+        context.jsscripts = ["updateEvent.js", "selectedCharacters.js"];
         var mysql = req.app.get('mysql');
         getEvent(res, mysql, context, req.params.id, complete);
         getCharacters(res, mysql, context, complete);

@@ -67,7 +67,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletecharacter.js", "searchCharacter.js"];
+        context.jsscripts = ["deleteCharacter.js", "searchCharacter.js"];
         var mysql = req.app.get('mysql');
         if (req.query['search']) {
             getCharactersSearch(res, req.query['search'], mysql, context, complete);
@@ -89,7 +89,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["selectedhouse.js", "selectedtitle.js", "updatecharacter.js"];
+        context.jsscripts = ["selectedHouse.js", "selectedTitle.js", "updateCharacter.js"];
         var mysql = req.app.get('mysql');
         getCharacter(res, mysql, context, req.params.id, complete);
         getHouses(res, mysql, context, complete);

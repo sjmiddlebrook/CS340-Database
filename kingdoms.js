@@ -53,7 +53,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletekingdom.js"];
+        context.jsscripts = ["deleteKingdom.js"];
         var mysql = req.app.get('mysql');
         getKingdoms(res, mysql, context, complete);
         getHouses(res, mysql, context, complete);
@@ -72,7 +72,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["selectedhouse.js", "selectedcontinent.js", "updatekingdom.js"];
+        context.jsscripts = ["selectedHouse.js", "selectedContinent.js", "updateKingdom.js"];
         var mysql = req.app.get('mysql');
         getKingdom(res, mysql, context, req.params.id, complete);
         getHouses(res, mysql, context, complete);
