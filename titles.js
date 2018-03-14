@@ -31,7 +31,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletetitle.js"];
+        context.jsscripts = ["deleteTitle.js"];
         var mysql = req.app.get('mysql');
         getTitles(res, mysql, context, complete);
         function complete(){
@@ -48,7 +48,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updatetitle.js"];
+        context.jsscripts = ["updateTitle.js"];
         var mysql = req.app.get('mysql');
         getTitle(res, mysql, context, req.params.id, complete);
         function complete(){

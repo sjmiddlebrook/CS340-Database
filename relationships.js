@@ -42,7 +42,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleterelationship.js"];
+        context.jsscripts = ["deleteRelationship.js"];
         var mysql = req.app.get('mysql');
         getRelationships(res, mysql, context, complete);
         getCharacters(res, mysql, context, complete);
@@ -60,7 +60,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updaterelationship.js"];
+        context.jsscripts = ["updateRelationship.js"];
         var mysql = req.app.get('mysql');
         getRelationship(res, mysql, context, req.params.id, complete);
         function complete(){
