@@ -34,7 +34,15 @@
         Setting: <input type="text" name="setting"><br>
     </div>
     <div class="form-group">
-    <input type="submit" value="Submit" class="btn btn-primary">
+        Characters involved:<br>
+        {{#each characters}}
+            <input type="checkbox" name="characters" id="{{id}}" value="{{id}}"/>
+            <label for="{{id}}">{{name}}</label><br>
+        {{/each}}
+    </select><br>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
     </div>
 </form>
 

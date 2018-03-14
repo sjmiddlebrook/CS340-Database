@@ -9,7 +9,7 @@ module.exports = function(){
                 res.end();
             }
             context.events = results;
-            getCharacters(res, mysql, context, complete);
+            getCharactersEvents(res, mysql, context, complete);
             complete();
         });
     }
@@ -27,7 +27,7 @@ module.exports = function(){
         });
     }
 
-    function getCharacters(res, mysql, context, complete){
+    function getCharactersEvents(res, mysql, context, complete){
         mysql.pool.query("SELECT got_event.id, got_event_characters.character_id, CONCAT(got_character.first_name, ' ', got_character.last_name) AS name FROM got_event INNER JOIN got_event_characters ON got_event.id = got_event_characters.event_id INNER JOIN got_character ON got_event_characters.character_id = got_character.id", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -46,6 +46,30 @@ module.exports = function(){
         });
     }
 
+    function getCharactersEvent(res, mysql, context, id, complete){
+        var sql = "SELECT got_event_characters.character_id FROM got_event_characters WHERE got_event_characters.event_id = ?";
+        var inserts = [id];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.eventCharacters = results;
+            complete();
+        });
+    }
+
+    function getCharacters(res, mysql, context, complete){
+        mysql.pool.query("SELECT got_character.id, CONCAT(got_character.first_name, ' ', got_character.last_name) AS name FROM got_character", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.characters = results;
+            complete();
+        });
+    }
+
     /*Display all events. Requires web based javascript to delete events with AJAX*/
 
     router.get('/', function(req, res){
@@ -54,9 +78,10 @@ module.exports = function(){
         context.jsscripts = ["deleteevent.js"];
         var mysql = req.app.get('mysql');
         getEvents(res, mysql, context, complete);
+        getCharacters(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 3){
                 res.render('events', context);
             }
 
@@ -68,12 +93,14 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updateevent.js"];
+        context.jsscripts = ["updateevent.js", "selectedCharacters.js"];
         var mysql = req.app.get('mysql');
         getEvent(res, mysql, context, req.params.id, complete);
+        getCharacters(res, mysql, context, complete);
+        getCharactersEvent(res, mysql, context, req.params.id, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 3){
                 res.render('update-event', context);
             }
         }
@@ -85,6 +112,15 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO got_event (name, setting) VALUES (?,?)";
         var inserts = [req.body.name, req.body.setting];
+        if (req.body.characters) {
+            sql += "; INSERT INTO got_event_characters (event_id, character_id) VALUES ";
+            for (var i = 0; i < req.body.characters.length; i++) {
+                sql +=  "((SELECT id FROM got_event WHERE name = '" + req.body.name + "'), ?), ";
+                inserts.push(req.body.characters[i]);
+            }
+            sql = sql.slice(0, -2) + ";";
+        }
+
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
