@@ -137,6 +137,17 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE got_event SET name=?, setting=? WHERE id=?";
         var inserts = [req.body.name, req.body.setting, req.params.id];
+        if (req.body.characters) {
+            // first delete existing characters then insert the new characters
+            sql += "; DELETE FROM got_event_characters WHERE event_id = ?";
+            inserts.push(req.params.id);
+            sql += "; INSERT INTO got_event_characters (event_id, character_id) VALUES ";
+            for (var i = 0; i < req.body.characters.length; i++) {
+                sql +=  "((SELECT id FROM got_event WHERE name = '" + req.body.name + "'), ?), ";
+                inserts.push(req.body.characters[i]);
+            }
+            sql = sql.slice(0, -2) + ";";
+        }
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
