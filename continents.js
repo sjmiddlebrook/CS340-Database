@@ -31,7 +31,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletecontinent.js"];
+        context.jsscripts = ["deleteContinent.js"];
         var mysql = req.app.get('mysql');
         getContinents(res, mysql, context, complete);
         function complete(){
@@ -48,7 +48,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updatecontinent.js"];
+        context.jsscripts = ["updateContinent.js"];
         var mysql = req.app.get('mysql');
         getContinent(res, mysql, context, req.params.id, complete);
         function complete(){

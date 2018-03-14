@@ -32,7 +32,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletehouse.js"];
+        context.jsscripts = ["deleteHouse.js"];
         var mysql = req.app.get('mysql');
         getHouses(res, mysql, context, complete);
         function complete(){
@@ -49,7 +49,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updatehouse.js"];
+        context.jsscripts = ["updateHouse.js"];
         var mysql = req.app.get('mysql');
         getHouse(res, mysql, context, req.params.id, complete);
         function complete(){
